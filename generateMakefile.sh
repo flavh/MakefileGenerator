@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/bin/bash
 print_help() {
     echo 'Usage : ./generateMakefile.sh [OPTION]...\n
 Generates a Makefile from a project written in C language.\n
