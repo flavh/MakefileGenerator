@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/dash
 print_help() {
     echo 'Usage : ./generateMakefile.sh [OPTION]...\n
 Generates a Makefile from a project written in C language.\n
@@ -131,20 +131,20 @@ generateMakefile() {
     echo "CFLAGS=$CFLAGS" >>Makefile
     echo "LDFLAGS=$LDFLAGS" >>Makefile
     echo "LDLIBS=$LDLIBS" >>Makefile
-    echo -e '\nall: $(TARGET)\n' >>Makefile
-    echo -e "\$(TARGET): $OUTPUTS" >>Makefile
-    echo -e '\t$(CC) $(LDFLAGS) $^ -o $(TARGET)' >>Makefile
+    echo '\nall: $(TARGET)\n' >>Makefile
+    echo "\$(TARGET): $OUTPUTS" >>Makefile
+    echo '\t$(CC) $(LDFLAGS) $^ -o $(TARGET)' >>Makefile
 
     for oFile in $OUTPUTS; do
         cFile=$(echo $oFile | sed 's/\.o/\.c/g')
         DEPS=''
         get_deps $cFile
         echo "$oFile: $cFile $DEPS" >>Makefile
-        echo -e '\t$(CC) $(CFLAGS) -c -o $@ $<' >>Makefile
+        echo '\t$(CC) $(CFLAGS) -c -o $@ $<' >>Makefile
     done
 
-    echo -e 'clean:\n\t rm -f *.o' >>Makefile
-    echo -e 'mrproper: clean\n\t rm -f $(TARGET)' >>Makefile
+    echo 'clean:\n\t rm -f *.o' >>Makefile
+    echo 'mrproper: clean\n\t rm -f $(TARGET)' >>Makefile
     echo 'Makefile generated.'
 }
 
